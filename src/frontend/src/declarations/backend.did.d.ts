@@ -23,29 +23,103 @@ export interface Product {
   'price' : number,
   'applianceId' : bigint,
 }
+export interface ServiceRequest {
+  'id' : bigint,
+  'status' : string,
+  'city' : string,
+  'postalCode' : string,
+  'name' : string,
+  'email' : string,
+  'creationTime' : bigint,
+  'message' : string,
+  'preferredTime' : string,
+  'applianceType' : string,
+  'brand' : string,
+  'phone' : string,
+  'applianceAge' : string,
+}
+export interface ServiceRequestInput {
+  'city' : string,
+  'postalCode' : string,
+  'name' : string,
+  'email' : string,
+  'message' : string,
+  'preferredTime' : string,
+  'applianceType' : string,
+  'brand' : string,
+  'phone' : string,
+  'applianceAge' : string,
+}
+export interface UserProfile {
+  'name' : string,
+  'email' : string,
+  'phone' : string,
+}
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
 export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   /**
-   * / Retrieve all appliances static data
+   * / COMPONENT: Service Request - Create Request
    */
+  'createServiceRequest' : ActorMethod<
+    [ServiceRequestInput],
+    { 'requestId' : bigint, 'confirmationMessage' : string }
+  >,
+  /**
+   * / COMPONENT: Service Request - Admin Bulk Delete
+   */
+  'deleteAllServiceRequests' : ActorMethod<
+    [],
+    { 'deletedRequestIds' : Array<bigint>, 'message' : string }
+  >,
+  /**
+   * / COMPONENT: Service Request - Admin Delete
+   */
+  'deleteServiceRequest' : ActorMethod<
+    [bigint],
+    { 'message' : string, 'deletedRequestId' : bigint }
+  >,
   'getAllAppliances' : ActorMethod<[], Array<Appliance>>,
-  /**
-   * / Retrieve all brands static data
-   */
   'getAllBrands' : ActorMethod<[], Array<Brand>>,
   /**
-   * / Retrieve all brands for a specific appliance by brandIds
+   * / COMPONENT: Service Request - Admin Get All
    */
+  'getAllServiceRequests' : ActorMethod<[], Array<ServiceRequest>>,
   'getBrandsForAppliance' : ActorMethod<[bigint], [] | [Array<Brand>]>,
-  /**
-   * / Bulk fetch specific products by IDs (if not implemented client-side)
-   */
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getProductsByIds' : ActorMethod<[Array<bigint>], Array<Product>>,
   /**
-   * / Search for products not explicitly needed due to static data
+   * / COMPONENT: Service Request - Admin Get Single
    */
+  'getServiceRequest' : ActorMethod<[bigint], ServiceRequest>,
+  /**
+   * / COMPONENT: Service Request Count - Admin
+   */
+  'getServiceRequestCount' : ActorMethod<[], bigint>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'searchProducts' : ActorMethod<
     [Array<bigint>, Array<bigint>, [] | [number]],
     [Array<Product>, bigint]
+  >,
+  /**
+   * / COMPONENT: Service Request - Admin Update
+   */
+  'updateServiceRequest' : ActorMethod<
+    [bigint, ServiceRequestInput],
+    ServiceRequest
+  >,
+  /**
+   * / COMPONENT: Service Request - Admin Update Status
+   */
+  'updateServiceRequestStatus' : ActorMethod<
+    [bigint, string],
+    { 'id' : bigint, 'newStatus' : string }
   >,
 }
 export declare const idlService: IDL.ServiceClass;

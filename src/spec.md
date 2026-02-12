@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Fix the complaint registration flow so the brand selection step shows only brands relevant to the user’s selected appliance icon, using English-only user-facing text.
+**Goal:** Replace the current VS logo and favicon with new transparent PNG assets that match the newly uploaded logo image (IMG_20260212_214859~4.png) exactly.
 
 **Planned changes:**
-- Update the appliance icon → brand selection step to filter the displayed brand list by the currently selected appliance (AC, Washing Machine, Refrigerator, Electrical Service).
-- Represent brands-per-appliance as a single, maintainable mapping keyed by an appliance identifier, and ensure the brand-selection UI derives its list only from the selected key.
-- Add an English empty-state message when an appliance has no configured brands, without falling back to a combined/all-brands list.
+- Create new transparent PNG logo assets (horizontal header sizes, square logo, and favicon sizes) derived from IMG_20260212_214859~4.png and save them under `frontend/public/assets/generated` using the `.dim_WxH.png` naming convention.
+- Update `frontend/src/App.tsx` to use the newly generated horizontal logo asset in the site header, preserving responsive sizing/aspect ratio and keeping the existing English alt text.
+- Update `frontend/index.html` to reference the newly generated favicon asset(s) instead of the currently referenced uploaded favicon.
 
-**User-visible outcome:** After selecting an appliance icon, the user sees only the brands for that appliance; if none exist, they see a clear English message indicating no brands are available.
+**User-visible outcome:** The site header logo and browser tab favicon display the newly uploaded VS logo across mobile and desktop.

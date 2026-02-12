@@ -1,49 +1,72 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Complaint flow: filter brand list by selected appliance",
+  "title": "Swap header logo + favicon to new uploaded VS logo (v4)",
   "requirements": [
     {
-      "id": "REQ-9",
-      "summary": "Filter the brand-selection step so only brands for the selected appliance are displayed, with all user-facing text in English.",
+      "id": "REQ-30",
+      "summary": "Add new transparent PNG logo assets (horizontal + square + favicons) generated from IMG_20260212_214859~4.png under frontend/public/assets/generated.",
       "acceptanceCriteria": [
-        "When the user selects the AC icon, only AC brands are shown.",
-        "When the user selects the Washing Machine icon, only washing machine brands are shown.",
-        "When the user selects the Refrigerator icon, only refrigerator brands are shown.",
-        "When the user selects the Electrical Service icon, only electrical-related brands (or an appropriate brand list) are shown.",
-        "No page in the brand-selection step displays a combined/all-brands list unless an explicit 'All brands' option is intentionally selected by the user (do not add such an option unless it already exists)."
+        "New PNG assets are created from IMG_20260212_214859~4.png with transparent backgrounds.",
+        "Assets are stored under frontend/public/assets/generated and use the .dim_WxH.png naming convention.",
+        "At least one horizontal header-sized logo and at least one square favicon-sized logo are produced."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Update the appliance icon/service selection UI to track a selected appliance key and render a brand list derived only from that selection. Ensure the brand list never falls back to showing all brands when an appliance is selected. Keep all user-facing labels/messages in English."
+          "path": "frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png",
+          "operation": "create",
+          "description": "Create transparent PNG horizontal logo asset generated from IMG_20260212_214859~4.png, matching proportions/colors/stroke weights exactly."
         },
         {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Add/replace stub queries with React Query hooks needed by the appliance→brand selection UI (e.g., loading appliances and the selected appliance’s brands) so the UI can display only the correct per-appliance brand list."
+          "path": "frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_400x150.png",
+          "operation": "create",
+          "description": "Create transparent PNG horizontal logo asset (smaller) generated from IMG_20260212_214859~4.png, matching proportions/colors/stroke weights exactly."
+        },
+        {
+          "path": "frontend/public/assets/generated/vs-logo-uploaded-exact-v4-square.dim_512x512.png",
+          "operation": "create",
+          "description": "Create transparent PNG square logo asset generated from IMG_20260212_214859~4.png, matching proportions/colors/stroke weights exactly."
+        },
+        {
+          "path": "frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_64x64.png",
+          "operation": "create",
+          "description": "Create transparent PNG favicon asset generated from IMG_20260212_214859~4.png at 64x64."
+        },
+        {
+          "path": "frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_32x32.png",
+          "operation": "create",
+          "description": "Create transparent PNG favicon asset generated from IMG_20260212_214859~4.png at 32x32."
         }
       ]
     },
     {
-      "id": "REQ-10",
-      "summary": "Create a single, maintainable brands-per-appliance mapping keyed by appliance, and make the brand-selection UI derive its list strictly from the selected key (including a clear empty state).",
+      "id": "REQ-31",
+      "summary": "Update the header logo in frontend/src/App.tsx to use the new v4 horizontal logo asset(s) while preserving responsive sizing/aspect ratio and keeping existing English alt text.",
       "acceptanceCriteria": [
-        "There is a single source of truth for brands-per-appliance (not duplicated across multiple UI components).",
-        "The brand-selection UI receives the selected appliance key and uses it to fetch/compute the brand list shown.",
-        "If the selected appliance has no configured brands, the UI shows a clear English empty-state message (e.g., 'No brands available for this appliance yet.') and does not fall back to showing all brands."
+        "frontend/src/App.tsx no longer references /assets/generated/vs-logo-uploaded-exact-horizontal.dim_800x300.png.",
+        "The header renders the new uploaded logo clearly on mobile and desktop with w-auto and object-contain behavior preserved.",
+        "The existing alt text remains in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useApplianceBrandMap.ts",
-          "operation": "create",
-          "description": "Create a dedicated hook/module that builds and exposes a single source-of-truth mapping of applianceKey → brands[] (derived from backend-provided appliance/brand data). This module should also provide a helper to return the selected appliance’s brands (or an empty list) strictly by appliance key."
-        },
-        {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Refactor the brand-selection rendering to depend exclusively on the mapping/hook keyed by the selected appliance. Add an English empty-state message (e.g., 'No brands available for this appliance yet.') when the selected appliance has no configured brands, without falling back to an all-brands list."
+          "description": "Replace the header <img> source to reference the new static asset(s) at frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png (and optionally incorporate frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_400x150.png for higher quality on smaller screens) while preserving existing responsive classes (w-auto, object-contain) and keeping the existing English alt text unchanged."
+        }
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "summary": "Update favicon link(s) in frontend/index.html to reference the new v4 favicon asset(s).",
+      "acceptanceCriteria": [
+        "frontend/index.html no longer references /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png.",
+        "The browser tab favicon displays the new uploaded logo."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Update the favicon <link> tag(s) to reference the new static assets frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_64x64.png and frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_32x32.png (e.g., via appropriate link tags/sizes) and remove the old reference to /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png."
         }
       ]
     }

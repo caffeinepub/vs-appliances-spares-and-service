@@ -8,12 +8,49 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const ServiceRequestInput = IDL.Record({
+  'city' : IDL.Text,
+  'postalCode' : IDL.Text,
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'message' : IDL.Text,
+  'preferredTime' : IDL.Text,
+  'applianceType' : IDL.Text,
+  'brand' : IDL.Text,
+  'phone' : IDL.Text,
+  'applianceAge' : IDL.Text,
+});
 export const Appliance = IDL.Record({
   'id' : IDL.Nat,
   'name' : IDL.Text,
   'brandIds' : IDL.Vec(IDL.Nat),
 });
 export const Brand = IDL.Record({ 'id' : IDL.Nat, 'name' : IDL.Text });
+export const ServiceRequest = IDL.Record({
+  'id' : IDL.Nat,
+  'status' : IDL.Text,
+  'city' : IDL.Text,
+  'postalCode' : IDL.Text,
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'creationTime' : IDL.Nat,
+  'message' : IDL.Text,
+  'preferredTime' : IDL.Text,
+  'applianceType' : IDL.Text,
+  'brand' : IDL.Text,
+  'phone' : IDL.Text,
+  'applianceAge' : IDL.Text,
+});
+export const UserProfile = IDL.Record({
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'phone' : IDL.Text,
+});
 export const Product = IDL.Record({
   'id' : IDL.Nat,
   'name' : IDL.Text,
@@ -23,34 +60,115 @@ export const Product = IDL.Record({
 });
 
 export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'createServiceRequest' : IDL.Func(
+      [ServiceRequestInput],
+      [IDL.Record({ 'requestId' : IDL.Nat, 'confirmationMessage' : IDL.Text })],
+      [],
+    ),
+  'deleteAllServiceRequests' : IDL.Func(
+      [],
+      [
+        IDL.Record({
+          'deletedRequestIds' : IDL.Vec(IDL.Nat),
+          'message' : IDL.Text,
+        }),
+      ],
+      [],
+    ),
+  'deleteServiceRequest' : IDL.Func(
+      [IDL.Nat],
+      [IDL.Record({ 'message' : IDL.Text, 'deletedRequestId' : IDL.Nat })],
+      [],
+    ),
   'getAllAppliances' : IDL.Func([], [IDL.Vec(Appliance)], ['query']),
   'getAllBrands' : IDL.Func([], [IDL.Vec(Brand)], ['query']),
+  'getAllServiceRequests' : IDL.Func([], [IDL.Vec(ServiceRequest)], []),
   'getBrandsForAppliance' : IDL.Func(
       [IDL.Nat],
       [IDL.Opt(IDL.Vec(Brand))],
       ['query'],
     ),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getProductsByIds' : IDL.Func(
       [IDL.Vec(IDL.Nat)],
       [IDL.Vec(Product)],
       ['query'],
     ),
+  'getServiceRequest' : IDL.Func([IDL.Nat], [ServiceRequest], []),
+  'getServiceRequestCount' : IDL.Func([], [IDL.Nat], []),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'searchProducts' : IDL.Func(
       [IDL.Vec(IDL.Nat), IDL.Vec(IDL.Nat), IDL.Opt(IDL.Float64)],
       [IDL.Vec(Product), IDL.Nat],
       ['query'],
+    ),
+  'updateServiceRequest' : IDL.Func(
+      [IDL.Nat, ServiceRequestInput],
+      [ServiceRequest],
+      [],
+    ),
+  'updateServiceRequestStatus' : IDL.Func(
+      [IDL.Nat, IDL.Text],
+      [IDL.Record({ 'id' : IDL.Nat, 'newStatus' : IDL.Text })],
+      [],
     ),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const ServiceRequestInput = IDL.Record({
+    'city' : IDL.Text,
+    'postalCode' : IDL.Text,
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'message' : IDL.Text,
+    'preferredTime' : IDL.Text,
+    'applianceType' : IDL.Text,
+    'brand' : IDL.Text,
+    'phone' : IDL.Text,
+    'applianceAge' : IDL.Text,
+  });
   const Appliance = IDL.Record({
     'id' : IDL.Nat,
     'name' : IDL.Text,
     'brandIds' : IDL.Vec(IDL.Nat),
   });
   const Brand = IDL.Record({ 'id' : IDL.Nat, 'name' : IDL.Text });
+  const ServiceRequest = IDL.Record({
+    'id' : IDL.Nat,
+    'status' : IDL.Text,
+    'city' : IDL.Text,
+    'postalCode' : IDL.Text,
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'creationTime' : IDL.Nat,
+    'message' : IDL.Text,
+    'preferredTime' : IDL.Text,
+    'applianceType' : IDL.Text,
+    'brand' : IDL.Text,
+    'phone' : IDL.Text,
+    'applianceAge' : IDL.Text,
+  });
+  const UserProfile = IDL.Record({
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'phone' : IDL.Text,
+  });
   const Product = IDL.Record({
     'id' : IDL.Nat,
     'name' : IDL.Text,
@@ -60,22 +178,71 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'createServiceRequest' : IDL.Func(
+        [ServiceRequestInput],
+        [
+          IDL.Record({
+            'requestId' : IDL.Nat,
+            'confirmationMessage' : IDL.Text,
+          }),
+        ],
+        [],
+      ),
+    'deleteAllServiceRequests' : IDL.Func(
+        [],
+        [
+          IDL.Record({
+            'deletedRequestIds' : IDL.Vec(IDL.Nat),
+            'message' : IDL.Text,
+          }),
+        ],
+        [],
+      ),
+    'deleteServiceRequest' : IDL.Func(
+        [IDL.Nat],
+        [IDL.Record({ 'message' : IDL.Text, 'deletedRequestId' : IDL.Nat })],
+        [],
+      ),
     'getAllAppliances' : IDL.Func([], [IDL.Vec(Appliance)], ['query']),
     'getAllBrands' : IDL.Func([], [IDL.Vec(Brand)], ['query']),
+    'getAllServiceRequests' : IDL.Func([], [IDL.Vec(ServiceRequest)], []),
     'getBrandsForAppliance' : IDL.Func(
         [IDL.Nat],
         [IDL.Opt(IDL.Vec(Brand))],
         ['query'],
       ),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getProductsByIds' : IDL.Func(
         [IDL.Vec(IDL.Nat)],
         [IDL.Vec(Product)],
         ['query'],
       ),
+    'getServiceRequest' : IDL.Func([IDL.Nat], [ServiceRequest], []),
+    'getServiceRequestCount' : IDL.Func([], [IDL.Nat], []),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'searchProducts' : IDL.Func(
         [IDL.Vec(IDL.Nat), IDL.Vec(IDL.Nat), IDL.Opt(IDL.Float64)],
         [IDL.Vec(Product), IDL.Nat],
         ['query'],
+      ),
+    'updateServiceRequest' : IDL.Func(
+        [IDL.Nat, ServiceRequestInput],
+        [ServiceRequest],
+        [],
+      ),
+    'updateServiceRequestStatus' : IDL.Func(
+        [IDL.Nat, IDL.Text],
+        [IDL.Record({ 'id' : IDL.Nat, 'newStatus' : IDL.Text })],
+        [],
       ),
   });
 };

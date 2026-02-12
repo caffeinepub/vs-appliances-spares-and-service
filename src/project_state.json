@@ -1,12 +1,20 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
-  "summary": "Website for VS Appliances Spares and Service (VS Home Appliances Spares and Service) offering AC, washing machine, refrigerator, and electrical services, including customer complaint/service request registration and an admin portal to manage technicians.",
-  "architectural_notes": [],
+  "projectStateVersion": 23,
+  "summary": "Website for VS Appliances Spares and Service (VS Home Appliances Spares and Service) offering AC, washing machine, refrigerator, and electrical services, with customer-facing contact details and a “Book Service” flow; brand selection/brand lists are removed from the customer journey; includes an admin portal to manage technicians; prepare the site for Google indexing via Search Console verification and sitemap submission.",
+  "architectural_notes": [
+    "Remove brand-selection step from the customer flow; service request/booking should not depend on per-appliance brand lists.",
+    "Logo assets must match the provided VS logo exactly; logo sizing should be adjustable/responsive where displayed (e.g., header/footer).",
+    "Support Google Search Console verification by allowing insertion of a verification <meta> tag into the global <head>.",
+    "Provide static SEO files (sitemap.xml, robots.txt) from the frontend/static assets (not backend).",
+    "Provide/export the VS logo as static transparent PNG assets in multiple required sizes (e.g., header display and favicon) for review before final integration."
+  ],
   "known_issues": [
-    "Brand list is not properly filtered by selected appliance: clicking an appliance icon shows all brand names instead of only brands for that appliance (needs custom/per-appliance brand list)."
+    "Current site logo/assets do not exactly match the provided VS logo; update/crop/clean to make the logo exact as provided.",
+    "Deployed site is still using an incorrect VS logo/image; replace it with the user-provided image asset."
   ],
   "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Transparent-background horizontal logo matching IMG_20260212_214859~4.png exactly (vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png)\n- Transparent-background horizontal logo matching IMG_20260212_214859~4.png exactly (vs-logo-uploaded-exact-v4-horizontal.dim_400x150.png)\n- Transparent-background square logo matching IMG_20260212_214859~4.png exactly (vs-logo-uploaded-exact-v4-square.dim_512x512.png)\n- Transparent-background favicon matching IMG_20260212_214859~4.png exactly (vs-favicon-uploaded-exact-v4.dim_64x64.png)\n- Transparent-background favicon matching IMG_20260212_214859~4.png exactly (vs-favicon-uploaded-exact-v4.dim_32x32.png)",
   "existing_features": [
     {
       "id": "feature-create-a-public-marketing-website-for-vs-appliances-spares-and-service-vs-home-appliances-spares-and-service-that-clearly-presents-the-business-name-and-the-offered-services-ac-washing-machine-refrigerator-and-electrical-service-including-messaging-that-services-are-offered-at-an-affordable-cost",
@@ -79,6 +87,182 @@
         "REQ-10"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-the-uploaded-vs-logo-to-the-website-branding-by-creating-static-logo-assets-from-the-uploaded-image-s-1770913914518-png-1770913914518-1-png-and-using-the-new-logo-in-the-site-header-and-anywhere-else-the-logo-is-currently-displayed",
+      "title": "Add the uploaded VS logo to the website branding by creating static logo assets from the uploaded image(s) (1770913914518.png / 1770913914518-1.png) and using the new logo in the site header (and anywhere else the logo is currently displayed).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-brand-selection-brand-display-from-the-customer-journey-clicking-a-service-card-must-no-longer-open-a-brands-dialog-or-show-any-brand-list-ui-remove-or-disable-any-customer-facing-text-referencing-brands-e-g-click-to-view-brands",
+      "title": "Remove brand selection/brand display from the customer journey: clicking a service card must no longer open a \"brands\" dialog or show any brand list UI; remove or disable any customer-facing text referencing brands (e.g., \"Click to view brands\").",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-customer-facing-book-service-flow-provide-a-clear-book-service-call-to-action-from-the-services-area-and-or-hero-header-that-opens-a-simple-booking-form-and-submits-a-service-request",
+      "title": "Implement a customer-facing \"Book Service\" flow: provide a clear \"Book Service\" call-to-action from the services area (and/or hero/header) that opens a simple booking form and submits a service request.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-customer-visible-contact-details-are-prominently-shown-and-easy-to-access-on-all-screen-sizes-including-mobile-phone-email-and-location-already-used-on-the-site",
+      "title": "Ensure customer-visible contact details are prominently shown and easy to access on all screen sizes, including mobile (phone, email, and location already used on the site).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-updated-static-logo-image-assets-that-match-the-uploaded-logo-exactly-1770913914518-2-png-preserving-the-same-visual-proportions-colors-and-stroke-weights-and-export-them-as-transparent-background-pngs",
+      "title": "Generate updated static logo image assets that match the uploaded logo exactly (1770913914518-2.png), preserving the same visual proportions, colors, and stroke weights, and export them as transparent-background PNGs.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-website-to-use-the-newly-generated-exact-logo-assets-for-both-the-header-logo-and-the-favicon-replacing-the-currently-referenced-generated-logo-files",
+      "title": "Update the website to use the newly generated exact-logo assets for both the header logo and the favicon, replacing the currently referenced generated logo files.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-customer-facing-book-a-service-dialog-to-remove-the-fields-email-address-postal-code-and-appliance-age-including-their-labels-inputs-and-any-related-helper-placeholder-text",
+      "title": "Update the customer-facing “Book a Service” dialog to remove the fields Email Address, Postal Code, and Appliance Age, including their labels, inputs, and any related helper/placeholder text.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-book-service-form-validation-and-submission-so-that-email-postal-code-and-appliance-age-are-no-longer-validated-and-are-not-required-to-submit-a-request-ensure-the-backend-createservicerequest-call-still-succeeds-by-sending-safe-empty-string-values-for-any-still-required-backend-fields-email-postalcode-applianceage-until-unless-the-backend-schema-is-changed-separately",
+      "title": "Update Book Service form validation and submission so that Email, Postal Code, and Appliance Age are no longer validated and are not required to submit a request; ensure the backend createServiceRequest call still succeeds by sending safe empty-string values for any still-required backend fields (email, postalCode, applianceAge) until/unless the backend schema is changed separately.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-new-static-logo-image-assets-that-match-the-uploaded-logo-image-img-20260212-214859-2-png-exactly-same-proportions-colors-and-stroke-weights-and-export-them-as-transparent-background-pngs-in-multiple-sizes-suitable-for-header-display-and-favicon-use",
+      "title": "Generate new static logo image assets that match the uploaded logo image (IMG_20260212_214859~2.png) exactly (same proportions, colors, and stroke weights), and export them as transparent-background PNGs in multiple sizes suitable for header display and favicon use.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-website-to-use-the-newly-generated-logo-assets-for-both-the-header-logo-in-frontend-src-app-tsx-and-the-favicon-in-frontend-index-html-replacing-the-currently-referenced-generated-logo-files",
+      "title": "Update the website to use the newly generated logo assets for both the header logo (in frontend/src/App.tsx) and the favicon (in frontend/index.html), replacing the currently referenced generated logo files.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-adjust-the-rendered-header-logo-sizing-responsively-so-the-new-logo-looks-clean-and-properly-sized-across-mobile-and-desktop-keeping-aspect-ratio-intact",
+      "title": "Adjust the rendered header logo sizing responsively so the new logo looks clean and properly sized across mobile and desktop (keeping aspect ratio intact).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-google-search-console-site-verification-support-by-inserting-a-google-verification-meta-tag-into-the-html-head-in-frontend-index-html-using-a-vite-environment-variable-so-the-verification-token-can-be-set-without-code-changes",
+      "title": "Add Google Search Console site verification support by inserting a Google verification <meta> tag into the HTML <head> in frontend/index.html, using a Vite environment variable so the verification token can be set without code changes.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-serve-a-static-sitemap-xml-from-the-frontend-so-google-can-discover-and-crawl-the-site-pages",
+      "title": "Generate and serve a static sitemap.xml from the frontend so Google can discover and crawl the site pages.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-robots-txt-file-as-a-static-frontend-asset-that-allows-crawling-and-references-the-sitemap-location",
+      "title": "Add a robots.txt file as a static frontend asset that allows crawling and references the sitemap location.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-seo-metadata-in-frontend-index-html-for-better-indexing-and-richer-search-results-using-english-text-only",
+      "title": "Add basic SEO metadata in frontend/index.html for better indexing and richer search results, using English text only.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expose-a-typed-frontend-environment-variable-for-the-google-verification-token-by-updating-frontend-src-vite-env-d-ts-to-include-vite-google-site-verification",
+      "title": "Expose a typed frontend environment variable for the Google verification token by updating frontend/src/vite-env.d.ts to include VITE_GOOGLE_SITE_VERIFICATION.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-static-sitemap-frontend-public-sitemap-xml-so-its-loc-entries-do-not-use-the-placeholder-domain-currently-https-your-domain-ic0-app-and-instead-resolve-to-the-real-deployed-site-base-url-via-a-configurable-build-time-setting",
+      "title": "Update the static sitemap (frontend/public/sitemap.xml) so its <loc> entries do not use the placeholder domain (currently https://your-domain.ic0.app/) and instead resolve to the real deployed site base URL via a configurable build-time setting.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-google-search-console-verification-injection-in-frontend-index-html-so-the-html-head-contains-a-valid-meta-name-google-site-verification-content-tag-sourced-from-the-existing-vite-environment-variable-vite-google-site-verification-and-does-not-render-an-invalid-placeholder-string-when-the-token-is-unset",
+      "title": "Fix Google Search Console verification injection in frontend/index.html so the HTML head contains a valid <meta name=\"google-site-verification\" content=\"...\"> tag sourced from the existing Vite environment variable VITE_GOOGLE_SITE_VERIFICATION, and does not render an invalid placeholder string when the token is unset.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-new-static-vs-logo-png-assets-from-the-uploaded-image-img-20260212-214859-3-png-that-match-the-logo-exactly-same-proportions-colors-and-stroke-weights-export-with-transparent-backgrounds-and-save-them-as-static-frontend-assets-under-frontend-public-assets-generated",
+      "title": "Generate new static VS logo PNG assets from the uploaded image (IMG_20260212_214859~3.png) that match the logo exactly (same proportions, colors, and stroke weights), export with transparent backgrounds, and save them as static frontend assets under frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-new-static-transparent-png-logo-assets-that-match-the-newly-uploaded-image-img-20260212-214859-4-png-exactly-same-proportions-colors-and-stroke-weights-and-save-them-under-frontend-public-assets-generated",
+      "title": "Generate new static transparent PNG logo assets that match the newly uploaded image (IMG_20260212_214859~4.png) exactly (same proportions, colors, and stroke weights) and save them under frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-site-header-logo-in-frontend-src-app-tsx-to-use-the-newly-generated-logo-asset-s-instead-of-the-currently-referenced-assets-generated-vs-logo-uploaded-exact-horizontal-dim-800x300-png-preserving-responsive-sizing-and-aspect-ratio",
+      "title": "Update the site header logo in frontend/src/App.tsx to use the newly generated logo asset(s) instead of the currently referenced /assets/generated/vs-logo-uploaded-exact-horizontal.dim_800x300.png, preserving responsive sizing and aspect ratio.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-favicon-reference-in-frontend-index-html-to-use-the-newly-generated-favicon-asset-s-instead-of-the-currently-referenced-assets-generated-vs-favicon-uploaded-exact-dim-64x64-png",
+      "title": "Update the favicon reference in frontend/index.html to use the newly generated favicon asset(s) instead of the currently referenced /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -91,12 +275,6 @@
     {
       "id": "AR-2",
       "summary": "Customer service request/complaint registration flow",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Appliance icons on site; clicking an appliance shows brands, allows selecting a brand, then registering a complaint",
       "reqIds": [],
       "status": "pending"
     },
@@ -118,6 +296,54 @@
       "reqIds": [
         "REQ-3"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add and display the business logo in the site branding (header/footer, favicon as applicable) using a static frontend asset",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add a customer-facing “Book Service” flow/CTA to let users submit a service booking/request",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Update Book Service form to remove fields: Email, postal code, and appliance age",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Update the site to use the provided VS logo exactly (match/crop/clean as needed) and adjust the displayed logo size appropriately (e.g., header/footer responsiveness).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Add Google Search Console site verification (HTML meta tag in site header) to enable Google ownership verification and indexing",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Generate and serve sitemap.xml (and submit via Google Search Console) to help Google index the site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add basic SEO/indexing optimizations (e.g., robots.txt, metadata) to improve Google crawl/index speed",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Generate sample VS logo assets in required sizes (e.g., header and favicon) for user review",
+      "reqIds": [],
       "status": "pending"
     }
   ],

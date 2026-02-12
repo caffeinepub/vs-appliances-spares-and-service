@@ -1,75 +1,80 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, X } from 'lucide-react';
-import { SiFacebook, SiInstagram } from 'react-icons/si';
-import { useApplianceBrandMap } from './hooks/useApplianceBrandMap';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './components/ui/dialog';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { Button } from './components/ui/button';
-import { Skeleton } from './components/ui/skeleton';
+import BookServiceDialog from './components/BookServiceDialog';
 
 export default function App() {
-    const [selectedService, setSelectedService] = useState<string | null>(null);
-    const { getBrandsForAppliance, isLoading } = useApplianceBrandMap();
+    const [isBookingDialogOpen, setIsBookingDialogOpen] = useState(false);
+    const [selectedAppliance, setSelectedAppliance] = useState<string>('');
 
     const services = [
         {
             icon: '/assets/generated/ac-icon.dim_256x256.png',
             title: 'AC Service',
             description: 'Installation, repair, and maintenance of all AC brands',
-            applianceName: 'Dryer' // Backend doesn't have AC, using Dryer as closest match
+            applianceType: 'AC'
         },
         {
             icon: '/assets/generated/washing-machine-icon.dim_256x256.png',
             title: 'Washing Machine',
             description: 'Expert repair for all washing machine models',
-            applianceName: 'Washing Machine'
+            applianceType: 'Washing Machine'
         },
         {
             icon: '/assets/generated/refrigerator-icon.dim_256x256.png',
             title: 'Refrigerator',
             description: 'Complete refrigerator repair and servicing',
-            applianceName: 'Fridge'
+            applianceType: 'Refrigerator'
         },
         {
             icon: '/assets/generated/electrical-icon.dim_256x256.png',
             title: 'Electrical Service',
             description: 'Professional electrical repairs and installations',
-            applianceName: 'Dishwasher' // Backend doesn't have electrical, using Dishwasher as placeholder
+            applianceType: 'Electrical'
         }
     ];
 
-    const handleServiceClick = (applianceName: string) => {
-        setSelectedService(applianceName);
+    const handleServiceClick = (applianceType: string) => {
+        setSelectedAppliance(applianceType);
+        setIsBookingDialogOpen(true);
     };
 
-    const handleCloseDialog = () => {
-        setSelectedService(null);
+    const handleBookServiceClick = () => {
+        setSelectedAppliance('');
+        setIsBookingDialogOpen(true);
     };
-
-    const selectedServiceData = services.find(s => s.applianceName === selectedService);
-    const brands = selectedService ? getBrandsForAppliance(selectedService) : [];
 
     return (
         <div className="min-h-screen flex flex-col">
             {/* Header */}
             <header className="bg-card border-b border-border sticky top-0 z-50">
-                <div className="container mx-auto px-4 py-4">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
+                <div className="container mx-auto px-4 py-3">
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center">
                             <img 
-                                src="/assets/generated/vs-logo.dim_800x300.png" 
-                                alt="VS Appliances Logo" 
-                                className="h-12 w-auto"
+                                src="/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png" 
+                                alt="VS Appliances Spares and Service Logo" 
+                                className="h-10 md:h-12 lg:h-14 w-auto object-contain"
                             />
                         </div>
-                        <div className="hidden md:flex items-center gap-6 text-sm">
-                            <a href="tel:9701078342" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-                                <Phone className="h-4 w-4" />
-                                <span>9701078342</span>
-                            </a>
-                            <a href="mailto:vsappliancessparesandservice@gmail.com" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-                                <Mail className="h-4 w-4" />
-                                <span>Contact Us</span>
-                            </a>
+                        <div className="flex items-center gap-3 md:gap-6">
+                            <div className="flex flex-col md:flex-row items-end md:items-center gap-2 md:gap-4 text-xs md:text-sm">
+                                <a href="tel:9701078342" className="flex items-center gap-1.5 text-foreground hover:text-primary transition-colors">
+                                    <Phone className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+                                    <span className="font-medium">9701078342</span>
+                                </a>
+                                <a href="mailto:vsappliancessparesandservice@gmail.com" className="flex items-center gap-1.5 text-foreground hover:text-primary transition-colors">
+                                    <Mail className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+                                    <span className="hidden sm:inline">vsappliancessparesandservice@gmail.com</span>
+                                    <span className="sm:hidden">Email Us</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-2 md:hidden">
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                            <span>Tirupathi District, Andhra Pradesh</span>
                         </div>
                     </div>
                 </div>
@@ -77,18 +82,27 @@ export default function App() {
 
             {/* Hero Section */}
             <main className="flex-1">
-                <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5 py-20">
+                <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 md:py-20">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center space-y-6">
-                            <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground">
                                 VS Appliances Spares and Service
                             </h1>
-                            <p className="text-xl md:text-2xl text-muted-foreground">
+                            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground">
                                 Professional Home Appliance Repair at Affordable Prices
                             </p>
-                            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                                 Expert service for AC, Washing Machines, Refrigerators, and Electrical Appliances in Tirupathi District, AP
                             </p>
+                            <div className="pt-4">
+                                <Button 
+                                    size="lg" 
+                                    onClick={handleBookServiceClick}
+                                    className="text-base md:text-lg px-8 py-6"
+                                >
+                                    Book Service Now
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -96,31 +110,31 @@ export default function App() {
                 {/* Services Section */}
                 <section className="py-16 bg-background">
                     <div className="container mx-auto px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-12 text-foreground">
                             Our Services
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                             {services.map((service, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => handleServiceClick(service.applianceName)}
+                                    onClick={() => handleServiceClick(service.applianceType)}
                                     className="bg-card border border-border rounded-lg p-6 text-center hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer group"
                                 >
                                     <div className="mb-4 flex justify-center">
                                         <img 
                                             src={service.icon} 
                                             alt={service.title}
-                                            className="h-24 w-24 object-contain group-hover:scale-110 transition-transform"
+                                            className="h-20 w-20 md:h-24 md:w-24 object-contain group-hover:scale-110 transition-transform"
                                         />
                                     </div>
-                                    <h3 className="text-xl font-semibold mb-2 text-foreground">
+                                    <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground">
                                         {service.title}
                                     </h3>
-                                    <p className="text-muted-foreground">
+                                    <p className="text-sm md:text-base text-muted-foreground">
                                         {service.description}
                                     </p>
                                     <p className="text-sm text-primary mt-3 font-medium">
-                                        Click to view brands
+                                        Book Service
                                     </p>
                                 </button>
                             ))}
@@ -131,7 +145,7 @@ export default function App() {
                 {/* Why Choose Us */}
                 <section className="py-16 bg-muted/30">
                     <div className="container mx-auto px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-12 text-foreground">
                             Why Choose Us
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -150,10 +164,10 @@ export default function App() {
                                 }
                             ].map((feature, index) => (
                                 <div key={index} className="text-center space-y-3">
-                                    <h3 className="text-xl font-semibold text-foreground">
+                                    <h3 className="text-lg md:text-xl font-semibold text-foreground">
                                         {feature.title}
                                     </h3>
-                                    <p className="text-muted-foreground">
+                                    <p className="text-sm md:text-base text-muted-foreground">
                                         {feature.description}
                                     </p>
                                 </div>
@@ -165,13 +179,13 @@ export default function App() {
                 {/* Contact Section */}
                 <section className="py-16 bg-background">
                     <div className="container mx-auto px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-12 text-foreground">
                             Contact Us
                         </h2>
                         <div className="max-w-2xl mx-auto space-y-6">
                             <div className="bg-card border border-border rounded-lg p-6 space-y-4">
                                 <div className="flex items-start gap-4">
-                                    <Phone className="h-6 w-6 text-primary mt-1" />
+                                    <Phone className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                                     <div>
                                         <h3 className="font-semibold text-foreground mb-1">Phone</h3>
                                         <a href="tel:9701078342" className="text-muted-foreground hover:text-primary transition-colors">
@@ -180,7 +194,7 @@ export default function App() {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <Mail className="h-6 w-6 text-primary mt-1" />
+                                    <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                                     <div>
                                         <h3 className="font-semibold text-foreground mb-1">Email</h3>
                                         <a href="mailto:vsappliancessparesandservice@gmail.com" className="text-muted-foreground hover:text-primary transition-colors break-all">
@@ -189,7 +203,7 @@ export default function App() {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <MapPin className="h-6 w-6 text-primary mt-1" />
+                                    <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                                     <div>
                                         <h3 className="font-semibold text-foreground mb-1">Location</h3>
                                         <p className="text-muted-foreground">
@@ -226,57 +240,12 @@ export default function App() {
                 </div>
             </footer>
 
-            {/* Brand Dialog */}
-            <Dialog open={selectedService !== null} onOpenChange={handleCloseDialog}>
-                <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl">
-                            {selectedServiceData?.title} - Available Brands
-                        </DialogTitle>
-                        <DialogDescription>
-                            We service the following brands for {selectedServiceData?.title.toLowerCase()}
-                        </DialogDescription>
-                    </DialogHeader>
-                    
-                    <div className="mt-6">
-                        {isLoading ? (
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {[1, 2, 3, 4, 5, 6].map((i) => (
-                                    <Skeleton key={i} className="h-20 w-full rounded-lg" />
-                                ))}
-                            </div>
-                        ) : brands.length > 0 ? (
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {brands.map((brand) => (
-                                    <div
-                                        key={brand.id.toString()}
-                                        className="bg-muted/50 border border-border rounded-lg p-4 text-center hover:bg-muted transition-colors"
-                                    >
-                                        <p className="font-semibold text-foreground">
-                                            {brand.name}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center py-12">
-                                <p className="text-muted-foreground text-lg">
-                                    No brands available for this appliance yet.
-                                </p>
-                                <p className="text-sm text-muted-foreground mt-2">
-                                    Please contact us for more information.
-                                </p>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="mt-6 flex justify-end">
-                        <Button onClick={handleCloseDialog} variant="outline">
-                            Close
-                        </Button>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            {/* Book Service Dialog */}
+            <BookServiceDialog 
+                open={isBookingDialogOpen}
+                onOpenChange={setIsBookingDialogOpen}
+                preselectedAppliance={selectedAppliance}
+            />
         </div>
     );
 }
