@@ -1,0 +1,69 @@
+{
+  "kind": "build_request",
+  "title": "Filter brand list by selected appliance in the complaint registration flow",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-9",
+      "text": "Fix the appliance icon -> brand selection step so that clicking an appliance icon shows only the brand names for that selected appliance (instead of showing all brands across all appliances). All user-facing labels and messages must be in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "When I click on icons All brand names can seen coustom"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When the user selects the AC icon, only AC brands are shown.",
+        "When the user selects the Washing Machine icon, only washing machine brands are shown.",
+        "When the user selects the Refrigerator icon, only refrigerator brands are shown.",
+        "When the user selects the Electrical Service icon, only electrical-related brands (or an appropriate brand list) are shown.",
+        "No page in the brand-selection step displays a combined/all-brands list unless an explicit 'All brands' option is intentionally selected by the user (do not add such an option unless it already exists)."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Ensure the per-appliance brand list is represented as a clear, maintainable mapping keyed by appliance (e.g., an appliance identifier), and the brand-selection UI derives its displayed list strictly from the selected appliance key.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "When I click on icons All brand names can seen coustom"
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is a single source of truth for brands-per-appliance (not duplicated across multiple UI components).",
+        "The brand-selection UI receives the selected appliance key and uses it to fetch/compute the brand list shown.",
+        "If the selected appliance has no configured brands, the UI shows a clear English empty-state message (e.g., 'No brands available for this appliance yet.') and does not fall back to showing all brands."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for any user-facing text.",
+    "Frontend files under the immutable paths in SYSTEM_CONTEXT must not be modified (compose them instead).",
+    "Backend must remain a single Motoko actor in backend/main.mo; add backend logic there only, and create backend/migration.mo only if a state upgrade is required."
+  ],
+  "nonGoals": [
+    "Adding new appliances or changing the existing appliance/service categories beyond fixing brand filtering.",
+    "Implementing third-party authentication providers (only Internet Identity is supported).",
+    "Adding real-time features (WebSockets/push notifications/chat)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

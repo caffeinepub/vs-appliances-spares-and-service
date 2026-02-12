@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Website for VS Appliances Spares and Service (VS Home Appliances Spares and Service) offering AC, washing machine, refrigerator, and electrical services, including customer complaint/service request registration and an admin portal to manage technicians.",
+  "architectural_notes": [],
+  "known_issues": [
+    "Brand list is not properly filtered by selected appliance: clicking an appliance icon shows all brand names instead of only brands for that appliance (needs custom/per-appliance brand list)."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-public-marketing-website-for-vs-appliances-spares-and-service-vs-home-appliances-spares-and-service-that-clearly-presents-the-business-name-and-the-offered-services-ac-washing-machine-refrigerator-and-electrical-service-including-messaging-that-services-are-offered-at-an-affordable-cost",
+      "title": "Create a public marketing website for “VS Appliances Spares and Service / VS Home Appliances Spares and Service” that clearly presents the business name and the offered services: AC, Washing Machine, Refrigerator, and Electrical Service, including messaging that services are offered at an affordable cost.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-customer-service-request-complaint-registration-flow-driven-by-appliance-icons-show-a-grid-of-appliance-icons-clicking-an-appliance-navigates-to-a-page-that-lists-brands-for-that-appliance-selecting-a-brand-opens-a-complaint-registration-form-and-submits-a-new-service-request",
+      "title": "Add a customer service-request (complaint) registration flow driven by appliance icons: show a grid of appliance icons; clicking an appliance navigates to a page that lists brands for that appliance; selecting a brand opens a complaint registration form and submits a new service request.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-area-secured-with-internet-identity-that-allows-an-admin-to-add-and-manage-technicians-and-to-review-incoming-service-requests-including-assigning-a-technician-and-updating-request-status",
+      "title": "Add an admin area secured with Internet Identity that allows an admin to add and manage technicians and to review incoming service requests (including assigning a technician and updating request status).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-business-contact-details-prominently-in-the-website-header-footer-and-on-a-dedicated-contact-section-page-phone-9701078342-tirupathi-district-ap-email-vsappliancessparesandservice-gmail-com",
+      "title": "Display business contact details prominently in the website header/footer and on a dedicated Contact section/page: Phone 9701078342, Tirupathi District AP, Email vsappliancessparesandservice@gmail.com.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-visual-theme-across-the-site-layout-typography-spacing-component-styling-suitable-for-a-local-appliance-service-business-avoid-blue-purple-as-the-primary-palette",
+      "title": "Apply a coherent visual theme across the site (layout, typography, spacing, component styling) suitable for a local appliance service business (avoid blue/purple as the primary palette).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-icons-branding-to-the-frontend-and-use-them-in-the-ui-do-not-serve-images-from-the-backend",
+      "title": "Add generated static image assets (icons/branding) to the frontend and use them in the UI (do not serve images from the backend).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-re-run-the-application-build-and-deployment-process-that-previously-failed-and-if-it-fails-again-capture-the-full-error-output-and-fix-the-underlying-issue-so-the-deployment-completes-successfully",
+      "title": "Re-run the application build and deployment process that previously failed, and if it fails again, capture the full error output and fix the underlying issue so the deployment completes successfully.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-appliance-icon-brand-selection-step-so-that-clicking-an-appliance-icon-shows-only-the-brand-names-for-that-selected-appliance-instead-of-showing-all-brands-across-all-appliances-all-user-facing-labels-and-messages-must-be-in-english",
+      "title": "Fix the appliance icon -> brand selection step so that clicking an appliance icon shows only the brand names for that selected appliance (instead of showing all brands across all appliances). All user-facing labels and messages must be in English.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-per-appliance-brand-list-is-represented-as-a-clear-maintainable-mapping-keyed-by-appliance-e-g-an-appliance-identifier-and-the-brand-selection-ui-derives-its-displayed-list-strictly-from-the-selected-appliance-key",
+      "title": "Ensure the per-appliance brand list is represented as a clear, maintainable mapping keyed by appliance (e.g., an appliance identifier), and the brand-selection UI derives its displayed list strictly from the selected appliance key.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a business website for VS Appliances Spares and Service with services overview (AC, washing machine, refrigerator, electrical) and affordable cost messaging",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Customer service request/complaint registration flow",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Appliance icons on site; clicking an appliance shows brands, allows selecting a brand, then registering a complaint",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Admin feature to add/manage technicians",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add business contact details (phone, email, location) to the website",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Implement backend data models and APIs (Motoko, single-actor) to support: appliances, brand lists per appliance, service requests, and technicians, including request status tracking.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "VS Appliances Spares and Service",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

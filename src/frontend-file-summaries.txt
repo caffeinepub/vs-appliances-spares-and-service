@@ -1,0 +1,10 @@
+{
+  "frontend/src/config.ts": "Configuration loader that provides backend canister ID and Internet Identity settings from Vite environment variables, plus actor creation helper using HttpAgent.",
+  "frontend/src/vite-env.d.ts": "TypeScript environment type definitions for Vite's import.meta.env variables including II_URL, II_DERIVATION_ORIGIN, and BACKEND_CANISTER_ID.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Internet Identity authentication provider hook that loads II URL from config instead of process.env, managing login/logout state and identity persistence.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching appliances, brands, and brands filtered by appliance from the backend.",
+  "frontend/src/App.tsx": "Main application component with interactive service icons that open a dialog displaying filtered brands for the selected appliance, includes empty state handling and loading states.",
+  "frontend/src/index.css": "Global stylesheet with OKLCH color system customized for appliance service business using warm orange/amber primary colors instead of default blue/purple palette.",
+  "frontend/src/hooks/useApplianceBrandMap.ts": "Custom hook that creates a single source-of-truth mapping of appliance names to their associated brands, with helper function to retrieve brands by appliance name.",
+  "frontend/src/main.tsx": "Application entry point with QueryClientProvider wrapper for React Query functionality."
+}

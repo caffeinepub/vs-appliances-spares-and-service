@@ -1,2 +1,3 @@
-# vs-appliances-spares-and-service
-Exported from Caffeine project: VS Appliances Spares and Service
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
