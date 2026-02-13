@@ -2,28 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-current-lucide-react-icons-with-static-image-assets-across-the-site-specifically-in-frontend-src-app-tsx-replace-phone-mail-and-mappin-icon-components-in-the-header-mobile-header-and-contact-section-with-img-tags-pointing-to-new-files-under-assets-generated-in-frontend-src-components-bookservicedialog-tsx-replace-loader2-submitting-spinner-and-checkcircle2-success-state-with-img-tags-pointing-to-new-files-under-assets-generated-the-new-images-must-visually-match-the-current-icon-sizes-and-alignment-including-existing-tailwind-sizing-classes-and-include-appropriate-alt-text-for-accessibility",
-      "featureTitle": "Replace the current lucide-react icons with static image assets across the site, specifically:\n- In `frontend/src/App.tsx`, replace `Phone`, `Mail`, and `MapPin` icon components in the header/mobile header and Contact section with `<img>` tags pointing to new files under `/assets/generated/`.\n- In `frontend/src/components/BookServiceDialog.tsx`, replace `Loader2` (submitting spinner) and `CheckCircle2` (success state) with `<img>` tags pointing to new files under `/assets/generated/`.\nThe new images must visually match the current icon sizes and alignment (including existing Tailwind sizing classes) and include appropriate `alt` text for accessibility.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/BookServiceDialog.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-the-required-icon-image-files-as-static-assets-under-frontend-public-assets-generated-using-the-exact-filenames-listed-in-imagerequirements-required-so-the-frontend-can-reference-them-via-assets-generated",
-      "featureTitle": "Add the required icon image files as static assets under `frontend/public/assets/generated/` using the exact filenames listed in `imageRequirements.required`, so the frontend can reference them via `/assets/generated/...`.",
+      "featureId": "feature-add-the-required-static-image-files-for-the-ac-washing-machine-refrigerator-and-electrical-service-cards-under-frontend-public-assets-generated-using-the-exact-filenames-referenced-by-the-frontend-so-they-load-from-assets-generated-at-runtime",
+      "featureTitle": "Add the required static image files for the AC, Washing Machine, Refrigerator, and Electrical service cards under frontend/public/assets/generated using the exact filenames referenced by the frontend so they load from /assets/generated/ at runtime.",
       "files": [],
       "components": [
         "core-infrastructure@1.0.2",
@@ -34,7 +14,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-5"
       ],
       "confidence": "high"
     }

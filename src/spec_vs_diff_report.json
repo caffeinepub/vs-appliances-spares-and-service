@@ -1,48 +1,37 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T01:24:24.549Z",
-  "summary": "REQ-2 appears partially implemented (phone/email icons replaced with <img> in App.tsx), but the diff is truncated and does not conclusively show MapPin/location replacements in all required places or the BookServiceDialog loading/success icon replacements. REQ-3 is not implemented because no new static asset files were added under frontend/public/assets/generated/. Additionally, App.tsx modifies service category icon paths, which was explicitly a non-goal.",
+  "generatedAt": "2026-02-13T01:37:29.778Z",
+  "summary": "The diff only modifies project_state.json (project metadata). No frontend code changes were made to replace service card icons with <img> tags, and no static image assets were added under frontend/public/assets/generated. Therefore, REQ-4 and REQ-5 are not implemented.",
   "missing_requirements": [
     {
-      "id": "REQ-3",
-      "requirement": "Add the required icon image files as static assets under `frontend/public/assets/generated/` using the exact required filenames so they can be referenced via `/assets/generated/...`.",
-      "reason": "The diff summary shows no added files, so the required PNG assets are not present in the repo changes.",
+      "id": "REQ-4",
+      "requirement": "Ensure the Services section uses static image assets (not icon components) for the AC, Washing Machine, Refrigerator, and Electrical service cards, and that each service card renders an <img> with an appropriate English alt text.",
+      "reason": "No changes are shown to frontend/src/App.tsx (or any frontend files) to replace icon components with <img> tags or add alt text; only project_state.json was modified.",
       "evidence": [
-        "File diff summary: \"Added: 0\""
+        "project_state.json"
       ]
     },
     {
-      "id": "REQ-2",
-      "requirement": "In `frontend/src/App.tsx`, replace `MapPin` icons in the header/mobile header and Contact section with `<img>` tags pointing to `/assets/generated/location-icon.dim_64x64.png`, with appropriate alt text.",
-      "reason": "The provided App.tsx snippet shows `<img>` replacements for phone and email icons, but the diff is truncated before any location icon usage is shown; therefore the MapPin replacement cannot be confirmed from the available evidence.",
+      "id": "REQ-5",
+      "requirement": "Add the required static image files for the AC, Washing Machine, Refrigerator, and Electrical service cards under frontend/public/assets/generated using the exact filenames referenced by the frontend so they load from /assets/generated/ at runtime.",
+      "reason": "No files were added in the diff (Added: 0). The required PNG assets are not present in the diff summary.",
       "evidence": [
-        "frontend/src/App.tsx (truncated snippet shows phone/email <img>, but no location icon shown)"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "requirement": "In `frontend/src/components/BookServiceDialog.tsx`, replace `Loader2` (submitting spinner) and `CheckCircle2` (success state) with `<img>` tags pointing to `/assets/generated/loading-spinner.dim_64x64.png` and `/assets/generated/success-check.dim_256x256.png`, including non-empty English alt text.",
-      "reason": "The BookServiceDialog.tsx diff is truncated and does not show the submitting or success UI sections where these icons would appear, so the replacements and alt text cannot be verified from the provided evidence.",
-      "evidence": [
-        "frontend/src/components/BookServiceDialog.tsx (truncated; no icon markup shown)"
+        "project_state.json"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Changed/repointed the existing service category image icons (AC/Washing Machine/Refrigerator/Electrical) to `/assets/generated/...` filenames.",
-      "reason": "The BuildRequest explicitly lists replacing these service category image icons as a non-goal, but App.tsx sets the service icons to generated asset paths for these categories.",
+      "description": "Tracking/summary content describing replacing Phone/Mail/MapPin icons in App.tsx and replacing Loader2/CheckCircle2 icons in BookServiceDialog.tsx with images under /assets/generated/.",
+      "reason": "These icon replacements are outside the stated request scope (which is specifically the four Services cards: AC, Washing Machine, Refrigerator, Electrical). The diff only shows these as existing_features metadata and does not show corresponding requested implementation changes.",
       "evidence": [
-        "frontend/src/App.tsx: services array uses '/assets/generated/ac-icon.dim_256x256.png', '/assets/generated/washing-machine-icon.dim_256x256.png', '/assets/generated/refrigerator-icon.dim_256x256.png', '/assets/generated/electrical-icon.dim_256x256.png'"
+        "project_state.json"
       ]
     }
   ],
-  "confidence": 0.74,
+  "confidence": 0.86,
   "changed_files": [
-    "frontend-file-summaries.txt",
-    "frontend/src/App.tsx",
-    "frontend/src/components/BookServiceDialog.tsx",
     "project_state.json"
   ]
 }

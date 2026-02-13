@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Replace specific `lucide-react` icons with static image assets while preserving sizing, alignment, and accessibility.
+**Goal:** Replace the Services section visuals for AC, Washing Machine, Refrigerator, and Electrical with static image assets instead of icon components.
 
 **Planned changes:**
-- Update `frontend/src/App.tsx` to remove `lucide-react` imports for `Phone`, `Mail`, and `MapPin`, and render equivalent `<img>` icons from `/assets/generated/` in the header/mobile header and Contact section.
-- Update `frontend/src/components/BookServiceDialog.tsx` to remove `lucide-react` imports for `Loader2` and `CheckCircle2`, and render equivalent `<img>` icons from `/assets/generated/` for the submitting and success states.
-- Add the required icon image files to `frontend/public/assets/generated/` with the exact required filenames so the app can load them via `/assets/generated/...`.
-- Ensure all replacement images keep the same apparent icon sizes (matching existing Tailwind sizing usage) and include non-empty English `alt` text.
+- Update the Services section in `frontend/src/App.tsx` so each of the four service cards renders an `<img>` (not a React icon component).
+- Set appropriate English `alt` text for each service image (AC Service, Washing Machine, Refrigerator, Electrical Service).
+- Ensure the four required image files are present under `frontend/public/assets/generated` and referenced via `/assets/generated/...` so they load correctly at runtime.
 
-**User-visible outcome:** The site displays image-based icons (phone/email/location, loading spinner, and success check) that look and align like the previous icons, with accessible alt text.
+**User-visible outcome:** In the Services section, the AC, Washing Machine, Refrigerator, and Electrical cards show image illustrations (with proper alt text) instead of icons, with no broken images on desktop or mobile.

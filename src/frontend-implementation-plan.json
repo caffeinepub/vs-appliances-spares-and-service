@@ -1,62 +1,51 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace lucide-react icons with generated image assets",
+  "title": "Replace service card icons with static image assets for four services",
   "requirements": [
     {
-      "id": "REQ-2",
-      "summary": "Replace specified lucide-react icons in App header/contact and booking dialog states with static generated image assets, keeping size/alignment and adding accessible alt text.",
+      "id": "REQ-4",
+      "summary": "Render static <img> assets (not icon components) for AC, Washing Machine, Refrigerator, and Electrical service cards with English alt text",
       "acceptanceCriteria": [
-        "`frontend/src/App.tsx` no longer imports `Phone`, `Mail`, or `MapPin` from `lucide-react`, and the header/contact UI uses `<img>` elements with `/assets/generated/...` sources instead.",
-        "`frontend/src/components/BookServiceDialog.tsx` no longer imports `Loader2` or `CheckCircle2` from `lucide-react`, and both the pending (Submitting...) and success states use `<img>` elements with `/assets/generated/...` sources instead.",
-        "Icon images render at the same apparent sizes as before (e.g., ~14–16px in the header row icons and ~24px in the Contact section, and ~16px spinner + ~64px success icon in the dialog), without breaking layout.",
-        "All replacement images include non-empty, English `alt` text (e.g., \"Phone\", \"Email\", \"Location\", \"Loading\", \"Success\")."
+        "In the Services section (frontend/src/App.tsx), each of the four service cards displays an <img> (not a React icon component) for AC, Washing Machine, Refrigerator, and Electrical.",
+        "Each of the four service images has an English alt attribute describing the service (e.g., \"AC Service\", \"Washing Machine\", \"Refrigerator\", \"Electrical Service\").",
+        "No lucide-react (or other icon library) components are used for these four service card visuals."
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Remove `Phone`, `Mail`, and `MapPin` imports from `lucide-react` and replace their usages in the header/mobile header and Contact section with `<img>` tags referencing `/assets/generated/phone-icon.dim_64x64.png`, `/assets/generated/email-icon.dim_64x64.png`, and `/assets/generated/location-icon.dim_64x64.png`. Preserve existing Tailwind sizing/alignment classes by applying equivalent `className` values to the `<img>` elements (including `flex-shrink-0` and spacing), and add appropriate non-empty English `alt` text (e.g., \"Phone\", \"Email\", \"Location\")."
-        },
-        {
-          "path": "frontend/src/components/BookServiceDialog.tsx",
-          "operation": "modify",
-          "description": "Remove `Loader2` and `CheckCircle2` imports from `lucide-react` and replace: (1) the submitting spinner in the submit button with an `<img>` referencing `/assets/generated/loading-spinner.dim_64x64.png` using the same sizing/alignment (`mr-2 h-4 w-4` equivalent) and retaining `animate-spin` for rotation if needed, and (2) the success state icon with an `<img>` referencing `/assets/generated/success-check.dim_256x256.png` sized to match the prior `h-16 w-16`. Add appropriate non-empty English `alt` text (e.g., \"Loading\", \"Success\")."
+          "description": "Ensure the Services grid uses only static image sources for the four service cards and renders them via <img>; make alt text explicit and English for each service (AC Service, Washing Machine, Refrigerator, Electrical Service), and confirm no icon components are used for these visuals."
         }
       ]
     },
     {
-      "id": "REQ-3",
-      "summary": "Add required generated icon image files under frontend/public/assets/generated with exact required filenames for runtime loading via /assets/generated/ paths.",
+      "id": "REQ-5",
+      "summary": "Add required static image files for the four service cards under frontend/public/assets/generated with exact filenames",
       "acceptanceCriteria": [
-        "All filenames in `imageRequirements.required` exist at `frontend/public/assets/generated/<filename>`.",
-        "The app successfully loads these assets at runtime via `/assets/generated/<filename>` without backend changes."
+        "The following files exist in frontend/public/assets/generated and can be loaded directly via the browser at /assets/generated/: ac-icon.dim_256x256.png, washing-machine-icon.dim_256x256.png, refrigerator-icon.dim_256x256.png, electrical-icon.dim_256x256.png.",
+        "The four service card images render correctly in the Services grid without broken image links in both desktop and mobile layouts."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/phone-icon.dim_64x64.png",
+          "path": "frontend/public/assets/generated/ac-icon.dim_256x256.png",
           "operation": "create",
-          "description": "Add the generated static image asset file for the phone handset icon at the exact path `frontend/public/assets/generated/phone-icon.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/phone-icon.dim_64x64.png`."
+          "description": "Add the static AC service image asset at this exact path and filename so it loads at runtime from /assets/generated/."
         },
         {
-          "path": "frontend/public/assets/generated/email-icon.dim_64x64.png",
+          "path": "frontend/public/assets/generated/washing-machine-icon.dim_256x256.png",
           "operation": "create",
-          "description": "Add the generated static image asset file for the envelope/mail icon at the exact path `frontend/public/assets/generated/email-icon.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/email-icon.dim_64x64.png`."
+          "description": "Add the static Washing Machine service image asset at this exact path and filename so it loads at runtime from /assets/generated/."
         },
         {
-          "path": "frontend/public/assets/generated/location-icon.dim_64x64.png",
+          "path": "frontend/public/assets/generated/refrigerator-icon.dim_256x256.png",
           "operation": "create",
-          "description": "Add the generated static image asset file for the map pin/location icon at the exact path `frontend/public/assets/generated/location-icon.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/location-icon.dim_64x64.png`."
+          "description": "Add the static Refrigerator service image asset at this exact path and filename so it loads at runtime from /assets/generated/."
         },
         {
-          "path": "frontend/public/assets/generated/loading-spinner.dim_64x64.png",
+          "path": "frontend/public/assets/generated/electrical-icon.dim_256x256.png",
           "operation": "create",
-          "description": "Add the generated static image asset file for the circular loading spinner icon at the exact path `frontend/public/assets/generated/loading-spinner.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/loading-spinner.dim_64x64.png`."
-        },
-        {
-          "path": "frontend/public/assets/generated/success-check.dim_256x256.png",
-          "operation": "create",
-          "description": "Add the generated static image asset file for the success checkmark-in-circle icon at the exact path `frontend/public/assets/generated/success-check.dim_256x256.png` so it can be referenced at runtime via `/assets/generated/success-check.dim_256x256.png`."
+          "description": "Add the static Electrical service image asset at this exact path and filename so it loads at runtime from /assets/generated/."
         }
       ]
     }
