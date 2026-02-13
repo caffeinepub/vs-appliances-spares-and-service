@@ -2,8 +2,28 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-generate-new-static-transparent-png-logo-assets-that-match-the-newly-uploaded-image-img-20260212-214859-4-png-exactly-same-proportions-colors-and-stroke-weights-and-save-them-under-frontend-public-assets-generated",
-      "featureTitle": "Generate new static transparent PNG logo assets that match the newly uploaded image (IMG_20260212_214859~4.png) exactly (same proportions, colors, and stroke weights) and save them under frontend/public/assets/generated.",
+      "featureId": "feature-replace-the-current-lucide-react-icons-with-static-image-assets-across-the-site-specifically-in-frontend-src-app-tsx-replace-phone-mail-and-mappin-icon-components-in-the-header-mobile-header-and-contact-section-with-img-tags-pointing-to-new-files-under-assets-generated-in-frontend-src-components-bookservicedialog-tsx-replace-loader2-submitting-spinner-and-checkcircle2-success-state-with-img-tags-pointing-to-new-files-under-assets-generated-the-new-images-must-visually-match-the-current-icon-sizes-and-alignment-including-existing-tailwind-sizing-classes-and-include-appropriate-alt-text-for-accessibility",
+      "featureTitle": "Replace the current lucide-react icons with static image assets across the site, specifically:\n- In `frontend/src/App.tsx`, replace `Phone`, `Mail`, and `MapPin` icon components in the header/mobile header and Contact section with `<img>` tags pointing to new files under `/assets/generated/`.\n- In `frontend/src/components/BookServiceDialog.tsx`, replace `Loader2` (submitting spinner) and `CheckCircle2` (success state) with `<img>` tags pointing to new files under `/assets/generated/`.\nThe new images must visually match the current icon sizes and alignment (including existing Tailwind sizing classes) and include appropriate `alt` text for accessibility.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/BookServiceDialog.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-required-icon-image-files-as-static-assets-under-frontend-public-assets-generated-using-the-exact-filenames-listed-in-imagerequirements-required-so-the-frontend-can-reference-them-via-assets-generated",
+      "featureTitle": "Add the required icon image files as static assets under `frontend/public/assets/generated/` using the exact filenames listed in `imageRequirements.required`, so the frontend can reference them via `/assets/generated/...`.",
       "files": [],
       "components": [
         "core-infrastructure@1.0.2",
@@ -14,45 +34,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-30"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-site-header-logo-in-frontend-src-app-tsx-to-use-the-newly-generated-logo-asset-s-instead-of-the-currently-referenced-assets-generated-vs-logo-uploaded-exact-horizontal-dim-800x300-png-preserving-responsive-sizing-and-aspect-ratio",
-      "featureTitle": "Update the site header logo in frontend/src/App.tsx to use the newly generated logo asset(s) instead of the currently referenced /assets/generated/vs-logo-uploaded-exact-horizontal.dim_800x300.png, preserving responsive sizing and aspect ratio.",
-      "files": [
-        "frontend/src/App.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-31"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-favicon-reference-in-frontend-index-html-to-use-the-newly-generated-favicon-asset-s-instead-of-the-currently-referenced-assets-generated-vs-favicon-uploaded-exact-dim-64x64-png",
-      "featureTitle": "Update the favicon reference in frontend/index.html to use the newly generated favicon asset(s) instead of the currently referenced /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png.",
-      "files": [
-        "frontend/index.html"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-32"
+        "REQ-3"
       ],
       "confidence": "high"
     }

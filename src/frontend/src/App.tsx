@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
 import { Button } from './components/ui/button';
 import BookServiceDialog from './components/BookServiceDialog';
 
@@ -52,19 +51,27 @@ export default function App() {
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center">
                             <img 
-                                src="/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png" 
+                                src="/assets/generated/vs-logo-horizontal-exact.dim_800x300.png" 
                                 alt="VS Appliances Spares and Service Logo" 
-                                className="h-10 md:h-12 lg:h-14 w-auto object-contain"
+                                className="h-10 md:h-12 w-auto"
                             />
                         </div>
                         <div className="flex items-center gap-3 md:gap-6">
                             <div className="flex flex-col md:flex-row items-end md:items-center gap-2 md:gap-4 text-xs md:text-sm">
                                 <a href="tel:9701078342" className="flex items-center gap-1.5 text-foreground hover:text-primary transition-colors">
-                                    <Phone className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+                                    <img 
+                                        src="/assets/generated/phone-icon.dim_64x64.png" 
+                                        alt="Phone" 
+                                        className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0"
+                                    />
                                     <span className="font-medium">9701078342</span>
                                 </a>
                                 <a href="mailto:vsappliancessparesandservice@gmail.com" className="flex items-center gap-1.5 text-foreground hover:text-primary transition-colors">
-                                    <Mail className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+                                    <img 
+                                        src="/assets/generated/email-icon.dim_64x64.png" 
+                                        alt="Email" 
+                                        className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0"
+                                    />
                                     <span className="hidden sm:inline">vsappliancessparesandservice@gmail.com</span>
                                     <span className="sm:hidden">Email Us</span>
                                 </a>
@@ -73,7 +80,11 @@ export default function App() {
                     </div>
                     <div className="mt-2 md:hidden">
                         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                            <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                            <img 
+                                src="/assets/generated/location-icon.dim_64x64.png" 
+                                alt="Location" 
+                                className="h-3.5 w-3.5 flex-shrink-0"
+                            />
                             <span>Tirupathi District, Andhra Pradesh</span>
                         </div>
                     </div>
@@ -185,7 +196,11 @@ export default function App() {
                         <div className="max-w-2xl mx-auto space-y-6">
                             <div className="bg-card border border-border rounded-lg p-6 space-y-4">
                                 <div className="flex items-start gap-4">
-                                    <Phone className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                    <img 
+                                        src="/assets/generated/phone-icon.dim_64x64.png" 
+                                        alt="Phone" 
+                                        className="h-6 w-6 mt-1 flex-shrink-0"
+                                    />
                                     <div>
                                         <h3 className="font-semibold text-foreground mb-1">Phone</h3>
                                         <a href="tel:9701078342" className="text-muted-foreground hover:text-primary transition-colors">
@@ -194,7 +209,11 @@ export default function App() {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                    <img 
+                                        src="/assets/generated/email-icon.dim_64x64.png" 
+                                        alt="Email" 
+                                        className="h-6 w-6 mt-1 flex-shrink-0"
+                                    />
                                     <div>
                                         <h3 className="font-semibold text-foreground mb-1">Email</h3>
                                         <a href="mailto:vsappliancessparesandservice@gmail.com" className="text-muted-foreground hover:text-primary transition-colors break-all">
@@ -203,7 +222,11 @@ export default function App() {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                    <img 
+                                        src="/assets/generated/location-icon.dim_64x64.png" 
+                                        alt="Location" 
+                                        className="h-6 w-6 mt-1 flex-shrink-0"
+                                    />
                                     <div>
                                         <h3 className="font-semibold text-foreground mb-1">Location</h3>
                                         <p className="text-muted-foreground">

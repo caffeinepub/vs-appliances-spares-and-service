@@ -6,7 +6,6 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useCreateServiceRequest } from '../hooks/useCreateServiceRequest';
-import { Loader2, CheckCircle2 } from 'lucide-react';
 
 interface BookServiceDialogProps {
     open: boolean;
@@ -130,7 +129,11 @@ export default function BookServiceDialog({ open, onOpenChange, preselectedAppli
             <Dialog open={open} onOpenChange={handleClose}>
                 <DialogContent className="max-w-md">
                     <div className="flex flex-col items-center justify-center py-8 text-center space-y-4">
-                        <CheckCircle2 className="h-16 w-16 text-green-500" />
+                        <img 
+                            src="/assets/generated/success-check.dim_256x256.png" 
+                            alt="Success" 
+                            className="h-16 w-16"
+                        />
                         <DialogTitle className="text-2xl">Request Submitted!</DialogTitle>
                         <DialogDescription className="text-base">
                             Thank you for your service request. We will contact you shortly to confirm your appointment.
@@ -145,9 +148,9 @@ export default function BookServiceDialog({ open, onOpenChange, preselectedAppli
         <Dialog open={open} onOpenChange={handleClose}>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl">Book a Service</DialogTitle>
+                    <DialogTitle>Book a Service</DialogTitle>
                     <DialogDescription>
-                        Fill in your details and we'll get back to you shortly to schedule your service.
+                        Fill in your details and we'll get back to you shortly
                     </DialogDescription>
                 </DialogHeader>
 
@@ -160,89 +163,93 @@ export default function BookServiceDialog({ open, onOpenChange, preselectedAppli
                                 value={formData.name}
                                 onChange={(e) => handleChange('name', e.target.value)}
                                 placeholder="Your full name"
-                                disabled={isPending}
+                                className={errors.name ? 'border-destructive' : ''}
                             />
-                            {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                            {errors.name && (
+                                <p className="text-sm text-destructive">{errors.name}</p>
+                            )}
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="phone">Mobile Number *</Label>
                             <Input
                                 id="phone"
-                                type="tel"
                                 value={formData.phone}
                                 onChange={(e) => handleChange('phone', e.target.value)}
                                 placeholder="10-digit mobile number"
-                                disabled={isPending}
+                                className={errors.phone ? 'border-destructive' : ''}
                             />
-                            {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+                            {errors.phone && (
+                                <p className="text-sm text-destructive">{errors.phone}</p>
+                            )}
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="city">Location *</Label>
+                        <Label htmlFor="city">City *</Label>
                         <Input
                             id="city"
                             value={formData.city}
                             onChange={(e) => handleChange('city', e.target.value)}
                             placeholder="Your city"
-                            disabled={isPending}
+                            className={errors.city ? 'border-destructive' : ''}
                         />
-                        {errors.city && <p className="text-sm text-destructive">{errors.city}</p>}
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="applianceType">Appliance Type *</Label>
-                            <Select
-                                value={formData.applianceType}
-                                onValueChange={(value) => handleChange('applianceType', value)}
-                                disabled={isPending}
-                            >
-                                <SelectTrigger id="applianceType">
-                                    <SelectValue placeholder="Select appliance type" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="AC">AC</SelectItem>
-                                    <SelectItem value="Washing Machine">Washing Machine</SelectItem>
-                                    <SelectItem value="Refrigerator">Refrigerator</SelectItem>
-                                    <SelectItem value="Electrical">Electrical</SelectItem>
-                                    <SelectItem value="Other">Other</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            {errors.applianceType && <p className="text-sm text-destructive">{errors.applianceType}</p>}
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="preferredTime">Preferred Time *</Label>
-                            <Select
-                                value={formData.preferredTime}
-                                onValueChange={(value) => handleChange('preferredTime', value)}
-                                disabled={isPending}
-                            >
-                                <SelectTrigger id="preferredTime">
-                                    <SelectValue placeholder="Select time" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</SelectItem>
-                                    <SelectItem value="Afternoon (12 PM - 3 PM)">Afternoon (12 PM - 3 PM)</SelectItem>
-                                    <SelectItem value="Evening (3 PM - 6 PM)">Evening (3 PM - 6 PM)</SelectItem>
-                                    <SelectItem value="Anytime">Anytime</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            {errors.preferredTime && <p className="text-sm text-destructive">{errors.preferredTime}</p>}
-                        </div>
+                        {errors.city && (
+                            <p className="text-sm text-destructive">{errors.city}</p>
+                        )}
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="message">Additional Message (Optional)</Label>
+                        <Label htmlFor="applianceType">Appliance Type *</Label>
+                        <Select
+                            value={formData.applianceType}
+                            onValueChange={(value) => handleChange('applianceType', value)}
+                        >
+                            <SelectTrigger className={errors.applianceType ? 'border-destructive' : ''}>
+                                <SelectValue placeholder="Select appliance type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="AC">AC</SelectItem>
+                                <SelectItem value="Washing Machine">Washing Machine</SelectItem>
+                                <SelectItem value="Refrigerator">Refrigerator</SelectItem>
+                                <SelectItem value="Electrical">Electrical</SelectItem>
+                                <SelectItem value="Other">Other</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        {errors.applianceType && (
+                            <p className="text-sm text-destructive">{errors.applianceType}</p>
+                        )}
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="preferredTime">Preferred Time *</Label>
+                        <Select
+                            value={formData.preferredTime}
+                            onValueChange={(value) => handleChange('preferredTime', value)}
+                        >
+                            <SelectTrigger className={errors.preferredTime ? 'border-destructive' : ''}>
+                                <SelectValue placeholder="Select preferred time" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</SelectItem>
+                                <SelectItem value="Afternoon (12 PM - 3 PM)">Afternoon (12 PM - 3 PM)</SelectItem>
+                                <SelectItem value="Evening (3 PM - 6 PM)">Evening (3 PM - 6 PM)</SelectItem>
+                                <SelectItem value="Anytime">Anytime</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        {errors.preferredTime && (
+                            <p className="text-sm text-destructive">{errors.preferredTime}</p>
+                        )}
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="message">Additional Details (Optional)</Label>
                         <Textarea
                             id="message"
                             value={formData.message}
                             onChange={(e) => handleChange('message', e.target.value)}
-                            placeholder="Describe the issue or any specific requirements..."
-                            rows={4}
-                            disabled={isPending}
+                            placeholder="Any specific issues or requirements..."
+                            rows={3}
                         />
                     </div>
 
@@ -252,19 +259,28 @@ export default function BookServiceDialog({ open, onOpenChange, preselectedAppli
                         </div>
                     )}
 
-                    <div className="flex justify-end gap-3 pt-4">
+                    <div className="flex gap-3 pt-4">
                         <Button
                             type="button"
                             variant="outline"
                             onClick={handleClose}
+                            className="flex-1"
                             disabled={isPending}
                         >
                             Cancel
                         </Button>
-                        <Button type="submit" disabled={isPending}>
+                        <Button
+                            type="submit"
+                            className="flex-1"
+                            disabled={isPending}
+                        >
                             {isPending ? (
                                 <>
-                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    <img 
+                                        src="/assets/generated/loading-spinner.dim_64x64.png" 
+                                        alt="Loading" 
+                                        className="mr-2 h-4 w-4 animate-spin"
+                                    />
                                     Submitting...
                                 </>
                             ) : (

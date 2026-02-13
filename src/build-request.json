@@ -1,78 +1,61 @@
 {
   "kind": "build_request",
-  "title": "Replace current VS logo image with newly uploaded logo (IMG_20260212_214859~4.png)",
+  "title": "Replace Lucide icons with image assets",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-30",
-      "text": "Generate new static transparent PNG logo assets that match the newly uploaded image (IMG_20260212_214859~4.png) exactly (same proportions, colors, and stroke weights) and save them under frontend/public/assets/generated.",
+      "id": "REQ-2",
+      "text": "Replace the current lucide-react icons with static image assets across the site, specifically:\n- In `frontend/src/App.tsx`, replace `Phone`, `Mail`, and `MapPin` icon components in the header/mobile header and Contact section with `<img>` tags pointing to new files under `/assets/generated/`.\n- In `frontend/src/components/BookServiceDialog.tsx`, replace `Loader2` (submitting spinner) and `CheckCircle2` (success state) with `<img>` tags pointing to new files under `/assets/generated/`.\nThe new images must visually match the current icon sizes and alignment (including existing Tailwind sizing classes) and include appropriate `alt` text for accessibility.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "remove that VS image and past my image"
+          "I need to change Icons to Image's"
         ]
       },
       "acceptanceCriteria": [
-        "New PNG assets are created from IMG_20260212_214859~4.png with transparent backgrounds.",
-        "Assets are stored under frontend/public/assets/generated and use the .dim_WxH.png naming convention.",
-        "At least one horizontal header-sized logo and at least one square favicon-sized logo are produced."
+        "`frontend/src/App.tsx` no longer imports `Phone`, `Mail`, or `MapPin` from `lucide-react`, and the header/contact UI uses `<img>` elements with `/assets/generated/...` sources instead.",
+        "`frontend/src/components/BookServiceDialog.tsx` no longer imports `Loader2` or `CheckCircle2` from `lucide-react`, and both the pending (Submitting...) and success states use `<img>` elements with `/assets/generated/...` sources instead.",
+        "Icon images render at the same apparent sizes as before (e.g., ~14–16px in the header row icons and ~24px in the Contact section, and ~16px spinner + ~64px success icon in the dialog), without breaking layout.",
+        "All replacement images include non-empty, English `alt` text (e.g., \"Phone\", \"Email\", \"Location\", \"Loading\", \"Success\")."
       ]
     },
     {
-      "id": "REQ-31",
-      "text": "Update the site header logo in frontend/src/App.tsx to use the newly generated logo asset(s) instead of the currently referenced /assets/generated/vs-logo-uploaded-exact-horizontal.dim_800x300.png, preserving responsive sizing and aspect ratio.",
+      "id": "REQ-3",
+      "text": "Add the required icon image files as static assets under `frontend/public/assets/generated/` using the exact filenames listed in `imageRequirements.required`, so the frontend can reference them via `/assets/generated/...`.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "remove that VS image and past my image"
+          "I need to change Icons to Image's"
         ]
       },
       "acceptanceCriteria": [
-        "frontend/src/App.tsx no longer references /assets/generated/vs-logo-uploaded-exact-horizontal.dim_800x300.png.",
-        "The header renders the new uploaded logo clearly on mobile and desktop with w-auto and object-contain behavior preserved.",
-        "The existing alt text remains in English."
-      ]
-    },
-    {
-      "id": "REQ-32",
-      "text": "Update the favicon reference in frontend/index.html to use the newly generated favicon asset(s) instead of the currently referenced /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "remove that VS image and past my image"
-        ]
-      },
-      "acceptanceCriteria": [
-        "frontend/index.html no longer references /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png.",
-        "The browser tab favicon displays the new uploaded logo."
+        "All filenames in `imageRequirements.required` exist at `frontend/public/assets/generated/<filename>`.",
+        "The app successfully loads these assets at runtime via `/assets/generated/<filename>` without backend changes."
       ]
     }
   ],
   "constraints": [
-    "Do not serve images from the backend; all logo files must be static frontend assets under frontend/public/assets/generated.",
-    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or anything under frontend/src/components/ui.",
-    "All user-facing text must remain in English."
+    "Do not edit files under `frontend/src/components/ui` or any other paths listed as immutable in SYSTEM_CONTEXT.",
+    "Keep all user-facing text in English."
   ],
   "nonGoals": [
-    "Redesigning the site layout, colors, or typography beyond what is necessary to swap the logo assets.",
-    "Changing backend (Motoko) data models or APIs."
+    "Adding Google Search Console verification meta tags or changing SEO/sitemap behavior.",
+    "Publishing/deploying a specific draft version to production.",
+    "Replacing the existing service category image icons (AC/Washing Machine/Refrigerator/Electrical), which are already images."
   ],
   "imageRequirements": {
     "required": [
-      "Transparent-background horizontal logo matching IMG_20260212_214859~4.png exactly (vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png)",
-      "Transparent-background horizontal logo matching IMG_20260212_214859~4.png exactly (vs-logo-uploaded-exact-v4-horizontal.dim_400x150.png)",
-      "Transparent-background square logo matching IMG_20260212_214859~4.png exactly (vs-logo-uploaded-exact-v4-square.dim_512x512.png)",
-      "Transparent-background favicon matching IMG_20260212_214859~4.png exactly (vs-favicon-uploaded-exact-v4.dim_64x64.png)",
-      "Transparent-background favicon matching IMG_20260212_214859~4.png exactly (vs-favicon-uploaded-exact-v4.dim_32x32.png)"
+      "Phone handset icon, solid/flat style, transparent background (phone-icon.dim_64x64.png)",
+      "Envelope/mail icon, solid/flat style, transparent background (email-icon.dim_64x64.png)",
+      "Map pin/location icon, solid/flat style, transparent background (location-icon.dim_64x64.png)",
+      "Circular loading spinner icon (separate frames not required), transparent background (loading-spinner.dim_64x64.png)",
+      "Checkmark in a circle icon, transparent background (success-check.dim_256x256.png)"
     ],
     "edits": []
   }

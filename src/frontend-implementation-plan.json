@@ -1,72 +1,62 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Swap header logo + favicon to new uploaded VS logo (v4)",
+  "title": "Replace lucide-react icons with generated image assets",
   "requirements": [
     {
-      "id": "REQ-30",
-      "summary": "Add new transparent PNG logo assets (horizontal + square + favicons) generated from IMG_20260212_214859~4.png under frontend/public/assets/generated.",
+      "id": "REQ-2",
+      "summary": "Replace specified lucide-react icons in App header/contact and booking dialog states with static generated image assets, keeping size/alignment and adding accessible alt text.",
       "acceptanceCriteria": [
-        "New PNG assets are created from IMG_20260212_214859~4.png with transparent backgrounds.",
-        "Assets are stored under frontend/public/assets/generated and use the .dim_WxH.png naming convention.",
-        "At least one horizontal header-sized logo and at least one square favicon-sized logo are produced."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png",
-          "operation": "create",
-          "description": "Create transparent PNG horizontal logo asset generated from IMG_20260212_214859~4.png, matching proportions/colors/stroke weights exactly."
-        },
-        {
-          "path": "frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_400x150.png",
-          "operation": "create",
-          "description": "Create transparent PNG horizontal logo asset (smaller) generated from IMG_20260212_214859~4.png, matching proportions/colors/stroke weights exactly."
-        },
-        {
-          "path": "frontend/public/assets/generated/vs-logo-uploaded-exact-v4-square.dim_512x512.png",
-          "operation": "create",
-          "description": "Create transparent PNG square logo asset generated from IMG_20260212_214859~4.png, matching proportions/colors/stroke weights exactly."
-        },
-        {
-          "path": "frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_64x64.png",
-          "operation": "create",
-          "description": "Create transparent PNG favicon asset generated from IMG_20260212_214859~4.png at 64x64."
-        },
-        {
-          "path": "frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_32x32.png",
-          "operation": "create",
-          "description": "Create transparent PNG favicon asset generated from IMG_20260212_214859~4.png at 32x32."
-        }
-      ]
-    },
-    {
-      "id": "REQ-31",
-      "summary": "Update the header logo in frontend/src/App.tsx to use the new v4 horizontal logo asset(s) while preserving responsive sizing/aspect ratio and keeping existing English alt text.",
-      "acceptanceCriteria": [
-        "frontend/src/App.tsx no longer references /assets/generated/vs-logo-uploaded-exact-horizontal.dim_800x300.png.",
-        "The header renders the new uploaded logo clearly on mobile and desktop with w-auto and object-contain behavior preserved.",
-        "The existing alt text remains in English."
+        "`frontend/src/App.tsx` no longer imports `Phone`, `Mail`, or `MapPin` from `lucide-react`, and the header/contact UI uses `<img>` elements with `/assets/generated/...` sources instead.",
+        "`frontend/src/components/BookServiceDialog.tsx` no longer imports `Loader2` or `CheckCircle2` from `lucide-react`, and both the pending (Submitting...) and success states use `<img>` elements with `/assets/generated/...` sources instead.",
+        "Icon images render at the same apparent sizes as before (e.g., ~14–16px in the header row icons and ~24px in the Contact section, and ~16px spinner + ~64px success icon in the dialog), without breaking layout.",
+        "All replacement images include non-empty, English `alt` text (e.g., \"Phone\", \"Email\", \"Location\", \"Loading\", \"Success\")."
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Replace the header <img> source to reference the new static asset(s) at frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png (and optionally incorporate frontend/public/assets/generated/vs-logo-uploaded-exact-v4-horizontal.dim_400x150.png for higher quality on smaller screens) while preserving existing responsive classes (w-auto, object-contain) and keeping the existing English alt text unchanged."
+          "description": "Remove `Phone`, `Mail`, and `MapPin` imports from `lucide-react` and replace their usages in the header/mobile header and Contact section with `<img>` tags referencing `/assets/generated/phone-icon.dim_64x64.png`, `/assets/generated/email-icon.dim_64x64.png`, and `/assets/generated/location-icon.dim_64x64.png`. Preserve existing Tailwind sizing/alignment classes by applying equivalent `className` values to the `<img>` elements (including `flex-shrink-0` and spacing), and add appropriate non-empty English `alt` text (e.g., \"Phone\", \"Email\", \"Location\")."
+        },
+        {
+          "path": "frontend/src/components/BookServiceDialog.tsx",
+          "operation": "modify",
+          "description": "Remove `Loader2` and `CheckCircle2` imports from `lucide-react` and replace: (1) the submitting spinner in the submit button with an `<img>` referencing `/assets/generated/loading-spinner.dim_64x64.png` using the same sizing/alignment (`mr-2 h-4 w-4` equivalent) and retaining `animate-spin` for rotation if needed, and (2) the success state icon with an `<img>` referencing `/assets/generated/success-check.dim_256x256.png` sized to match the prior `h-16 w-16`. Add appropriate non-empty English `alt` text (e.g., \"Loading\", \"Success\")."
         }
       ]
     },
     {
-      "id": "REQ-32",
-      "summary": "Update favicon link(s) in frontend/index.html to reference the new v4 favicon asset(s).",
+      "id": "REQ-3",
+      "summary": "Add required generated icon image files under frontend/public/assets/generated with exact required filenames for runtime loading via /assets/generated/ paths.",
       "acceptanceCriteria": [
-        "frontend/index.html no longer references /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png.",
-        "The browser tab favicon displays the new uploaded logo."
+        "All filenames in `imageRequirements.required` exist at `frontend/public/assets/generated/<filename>`.",
+        "The app successfully loads these assets at runtime via `/assets/generated/<filename>` without backend changes."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Update the favicon <link> tag(s) to reference the new static assets frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_64x64.png and frontend/public/assets/generated/vs-favicon-uploaded-exact-v4.dim_32x32.png (e.g., via appropriate link tags/sizes) and remove the old reference to /assets/generated/vs-favicon-uploaded-exact.dim_64x64.png."
+          "path": "frontend/public/assets/generated/phone-icon.dim_64x64.png",
+          "operation": "create",
+          "description": "Add the generated static image asset file for the phone handset icon at the exact path `frontend/public/assets/generated/phone-icon.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/phone-icon.dim_64x64.png`."
+        },
+        {
+          "path": "frontend/public/assets/generated/email-icon.dim_64x64.png",
+          "operation": "create",
+          "description": "Add the generated static image asset file for the envelope/mail icon at the exact path `frontend/public/assets/generated/email-icon.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/email-icon.dim_64x64.png`."
+        },
+        {
+          "path": "frontend/public/assets/generated/location-icon.dim_64x64.png",
+          "operation": "create",
+          "description": "Add the generated static image asset file for the map pin/location icon at the exact path `frontend/public/assets/generated/location-icon.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/location-icon.dim_64x64.png`."
+        },
+        {
+          "path": "frontend/public/assets/generated/loading-spinner.dim_64x64.png",
+          "operation": "create",
+          "description": "Add the generated static image asset file for the circular loading spinner icon at the exact path `frontend/public/assets/generated/loading-spinner.dim_64x64.png` so it can be referenced at runtime via `/assets/generated/loading-spinner.dim_64x64.png`."
+        },
+        {
+          "path": "frontend/public/assets/generated/success-check.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated static image asset file for the success checkmark-in-circle icon at the exact path `frontend/public/assets/generated/success-check.dim_256x256.png` so it can be referenced at runtime via `/assets/generated/success-check.dim_256x256.png`."
         }
       ]
     }

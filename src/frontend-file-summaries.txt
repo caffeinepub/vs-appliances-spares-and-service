@@ -1,23 +1,13 @@
 {
   "frontend/src/config.ts": "Configuration loader that provides backend canister ID and Internet Identity settings from Vite environment variables, plus actor creation helper using HttpAgent.",
-  "frontend/src/vite-env.d.ts": "TypeScript environment type definitions for Vite's import.meta.env variables including VITE_SITE_URL for sitemap generation.",
+  "frontend/src/vite-env.d.ts": "TypeScript environment type definitions for Vite's import.meta.env variables including II_URL, II_DERIVATION_ORIGIN, and BACKEND_CANISTER_ID.",
   "frontend/src/hooks/useInternetIdentity.ts": "Internet Identity authentication provider hook that loads II URL from config instead of process.env, managing login/logout state and identity persistence.",
   "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching appliances, brands, and brands filtered by appliance from the backend.",
-  "frontend/src/App.tsx": "Main application component with updated VS logo reference to use the new v4 uploaded logo asset (vs-logo-uploaded-exact-v4-horizontal.dim_800x300.png) with responsive sizing and object-contain to preserve aspect ratio, prominent contact details in header, and integrated Book Service CTA that opens booking dialog for customer service requests.",
+  "frontend/src/App.tsx": "Main application component with VS logo, contact details using image icons (phone, email, location) instead of lucide-react icons, service cards, and integrated Book Service dialog.",
   "frontend/src/index.css": "Global stylesheet with OKLCH color system customized for appliance service business using warm orange/amber primary colors instead of default blue/purple palette.",
   "frontend/src/hooks/useApplianceBrandMap.ts": "Custom hook that creates a single source-of-truth mapping of appliance names to their associated brands, with helper function to retrieve brands by appliance name.",
   "frontend/src/main.tsx": "Application entry point with QueryClientProvider wrapper for React Query functionality.",
-  "frontend/src/components/BookServiceDialog.tsx": "Customer-facing booking dialog with streamlined form requiring only name, mobile number, location (city), appliance type, and preferred time; removed email, postal code, and appliance age fields while maintaining backend compatibility by sending empty strings for removed fields.",
+  "frontend/src/components/BookServiceDialog.tsx": "Customer-facing booking dialog with streamlined form using image icons for loading spinner and success checkmark instead of lucide-react icons.",
   "frontend/src/hooks/useCreateServiceRequest.ts": "React Query mutation hook that submits service request data to the backend createServiceRequest endpoint and invalidates related queries on success.",
-  "frontend/index.html": "HTML entry point with updated favicon references to use the new v4 uploaded logo assets (vs-favicon-uploaded-exact-v4.dim_64x64.png and vs-favicon-uploaded-exact-v4.dim_32x32.png) with proper size attributes, and inline script that conditionally injects Google site verification meta tag.",
-  "frontend/public/sitemap.xml": "XML sitemap placeholder file with template syntax that will be overwritten during build by the sitemap generator script.",
-  "frontend/public/robots.txt": "Robots.txt file allowing all crawlers and referencing the sitemap location.",
-  "frontend/public/sitemap.template.xml": "Sitemap template with {{SITE_URL}} placeholder that gets replaced by the build-time generator script with the configured base site URL.",
-  "frontend/scripts/generate-sitemap.mjs": "Build-time Node.js script that reads VITE_SITE_URL environment variable, validates it, and generates frontend/public/sitemap.xml with absolute URLs; fails with clear error message if VITE_SITE_URL is missing.",
-  "frontend/.env.example": "Environment variable documentation file showing required VITE_SITE_URL for sitemap generation and optional VITE_GOOGLE_SITE_VERIFICATION for Google Search Console verification.",
-  "frontend/public/assets/generated/vs-logo-uploaded-exact-v3-horizontal.dim_800x300.png": "Horizontal VS logo (800x300) with transparent background, navy blue V and orange S with circular swoosh.",
-  "frontend/public/assets/generated/vs-logo-uploaded-exact-v3-horizontal.dim_400x150.png": "Horizontal VS logo (400x150) with transparent background, navy blue V and orange S with circular swoosh.",
-  "frontend/public/assets/generated/vs-logo-uploaded-exact-v3-square.dim_512x512.png": "Square VS logo (512x512) with transparent background, navy blue V and orange S with circular swoosh, centered.",
-  "frontend/public/assets/generated/vs-favicon-uploaded-exact-v3.dim_64x64.png": "Favicon-sized VS logo (64x64) with transparent background, navy blue V and orange S with circular swoosh.",
-  "frontend/public/assets/generated/vs-favicon-uploaded-exact-v3.dim_32x32.png": "Small favicon VS logo (32x32) with transparent background, navy blue V and orange S with circular swoosh."
+  "frontend/index.html": "HTML entry point with updated favicon reference to use the exact VS logo favicon asset (vs-favicon-exact.dim_64x64.png)."
 }

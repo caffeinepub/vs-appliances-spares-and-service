@@ -1,33 +1,48 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T17:34:58.412Z",
-  "summary": "REQ-31 and REQ-32 appear implemented by updating the header logo path in frontend/src/App.tsx and favicon links in frontend/index.html to the new v4 asset names. REQ-30 (actually adding the new generated PNG files under frontend/public/assets/generated) is not evidenced in the diff summary. The diff also introduces unrelated HTML behavior (Google site verification injection) that was not requested.",
+  "generatedAt": "2026-02-13T01:24:24.549Z",
+  "summary": "REQ-2 appears partially implemented (phone/email icons replaced with <img> in App.tsx), but the diff is truncated and does not conclusively show MapPin/location replacements in all required places or the BookServiceDialog loading/success icon replacements. REQ-3 is not implemented because no new static asset files were added under frontend/public/assets/generated/. Additionally, App.tsx modifies service category icon paths, which was explicitly a non-goal.",
   "missing_requirements": [
     {
-      "id": "REQ-30",
-      "requirement": "Generate new static transparent PNG logo assets that match the newly uploaded image (IMG_20260212_214859~4.png) exactly and save them under frontend/public/assets/generated using the .dim_WxH.png naming convention (including at least one horizontal logo and at least one square/favicon-sized logo).",
-      "reason": "The diff shows no added/modified PNG files under frontend/public/assets/generated for the new v4 assets; only code references to v4 filenames are shown. The diff summary indicates 'Added: 0' files, and the visible asset listing references v3 assets, not v4.",
+      "id": "REQ-3",
+      "requirement": "Add the required icon image files as static assets under `frontend/public/assets/generated/` using the exact required filenames so they can be referenced via `/assets/generated/...`.",
+      "reason": "The diff summary shows no added files, so the required PNG assets are not present in the repo changes.",
       "evidence": [
-        "File diff summary header: \"Added: 0\"",
-        "frontend-file-summaries.txt (truncated) shows v3 asset files but does not show v4 asset files being added"
+        "File diff summary: \"Added: 0\""
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "In `frontend/src/App.tsx`, replace `MapPin` icons in the header/mobile header and Contact section with `<img>` tags pointing to `/assets/generated/location-icon.dim_64x64.png`, with appropriate alt text.",
+      "reason": "The provided App.tsx snippet shows `<img>` replacements for phone and email icons, but the diff is truncated before any location icon usage is shown; therefore the MapPin replacement cannot be confirmed from the available evidence.",
+      "evidence": [
+        "frontend/src/App.tsx (truncated snippet shows phone/email <img>, but no location icon shown)"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "In `frontend/src/components/BookServiceDialog.tsx`, replace `Loader2` (submitting spinner) and `CheckCircle2` (success state) with `<img>` tags pointing to `/assets/generated/loading-spinner.dim_64x64.png` and `/assets/generated/success-check.dim_256x256.png`, including non-empty English alt text.",
+      "reason": "The BookServiceDialog.tsx diff is truncated and does not show the submitting or success UI sections where these icons would appear, so the replacements and alt text cannot be verified from the provided evidence.",
+      "evidence": [
+        "frontend/src/components/BookServiceDialog.tsx (truncated; no icon markup shown)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Inline script to conditionally inject a Google site verification meta tag at runtime/build time.",
-      "reason": "Not requested in the BuildRequest and goes beyond the stated non-goals (logo swap only; no broader site/SEO changes requested).",
+      "description": "Changed/repointed the existing service category image icons (AC/Washing Machine/Refrigerator/Electrical) to `/assets/generated/...` filenames.",
+      "reason": "The BuildRequest explicitly lists replacing these service category image icons as a non-goal, but App.tsx sets the service icons to generated asset paths for these categories.",
       "evidence": [
-        "frontend/index.html (added <script> that reads %VITE_GOOGLE_SITE_VERIFICATION% and appends meta google-site-verification)"
+        "frontend/src/App.tsx: services array uses '/assets/generated/ac-icon.dim_256x256.png', '/assets/generated/washing-machine-icon.dim_256x256.png', '/assets/generated/refrigerator-icon.dim_256x256.png', '/assets/generated/electrical-icon.dim_256x256.png'"
       ]
     }
   ],
-  "confidence": 0.72,
+  "confidence": 0.74,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/index.html",
     "frontend/src/App.tsx",
+    "frontend/src/components/BookServiceDialog.tsx",
     "project_state.json"
   ]
 }
